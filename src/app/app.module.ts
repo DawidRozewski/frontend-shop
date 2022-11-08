@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { DefaultModule } from './layoutd/default/default.module';
 import { FullpageModule } from './layoutd/fullpage/fullpage.module';
 
+import { FullpageadminModule } from './layoutd/fullpageadmin/fullpageadmin.module';
+
+
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import { FullpageModule } from './layoutd/fullpage/fullpage.module';
     BrowserModule,
     AppRoutingModule,
     DefaultModule,
-    FullpageModule
+    FullpageModule,
+    FullpageadminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
