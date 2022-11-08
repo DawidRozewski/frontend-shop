@@ -7,6 +7,7 @@ import { DefaultModule } from './layoutd/default/default.module';
 import { FullpageModule } from './layoutd/fullpage/fullpage.module';
 
 import { FullpageadminModule } from './layoutd/fullpageadmin/fullpageadmin.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -20,7 +21,8 @@ import { FullpageadminModule } from './layoutd/fullpageadmin/fullpageadmin.modul
     AppRoutingModule,
     DefaultModule,
     FullpageModule,
-    FullpageadminModule
+    FullpageadminModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
