@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultComponent } from './layoutd/default/default.component';
 import { FullpageComponent } from './layoutd/fullpage/fullpage.component';
 import { FullpageadminComponent } from './layoutd/fullpageadmin/fullpageadmin.component';
+import { AdminProductComponent } from './modules/admin/admin-product/admin-product.component';
 import { AdminComponent } from './modules/admin/admin.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
@@ -22,7 +23,8 @@ const routes: Routes = [
   },
   {
     path:'', component: FullpageadminComponent, children:[
-      {path:'admin', component: AdminComponent}
+      {path:'admin', component: AdminComponent},
+      {path:'admin/products', component: AdminProductComponent}
     ]
   }
 ];
