@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultComponent } from './layoutd/default/default.component';
 import { FullpageComponent } from './layoutd/fullpage/fullpage.component';
 import { FullpageadminComponent } from './layoutd/fullpageadmin/fullpageadmin.component';
+import { AdminProductAddComponent } from './modules/admin/admin-product-add/admin-product-add.component';
 import { AdminProductUpdateComponent } from './modules/admin/admin-product-update/admin-product-update.component';
 import { AdminProductComponent } from './modules/admin/admin-product/admin-product.component';
 import { AdminComponent } from './modules/admin/admin.component';
@@ -26,7 +27,8 @@ const routes: Routes = [
     path:'', component: FullpageadminComponent, children:[
       {path:'admin', component: AdminComponent},
       {path:'admin/products', component: AdminProductComponent},
-      {path:'admin/products/update/:id', component: AdminProductUpdateComponent}
+      {path:'admin/products/update/:id', component: AdminProductUpdateComponent},
+      {path:'admin/products/add', component: AdminProductAddComponent}
     ]
   }
 ];
