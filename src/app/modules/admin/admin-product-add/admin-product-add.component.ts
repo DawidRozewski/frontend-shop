@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {AdminMessageService} from '../admin-message.service';
 import {AdminProductAddService} from './admin-product-add.service';
+import {AdminProductUpdateService} from "../admin-product-update/admin-product-update.service";
 
 @Component({
   selector: 'app-admin-product-add',
@@ -13,10 +14,15 @@ import {AdminProductAddService} from './admin-product-add.service';
 export class AdminProductAddComponent implements OnInit {
 
   productForm!: FormGroup;
+  requiredFileTypes = "image/jpeg, image/png";
+  imageForm!: FormGroup
+  image: string | null = null;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private adminProductAddService: AdminProductAddService,
+    private adminProductUpdateService: AdminProductUpdateService,
     private router: Router,
     private snackBar: MatSnackBar,
     private adminMessageService: AdminMessageService
@@ -33,6 +39,10 @@ export class AdminProductAddComponent implements OnInit {
       currency: ['PLN', Validators.required],
       slug: ['', [Validators.required, Validators.minLength(4)]]
     })
+
+    this.imageForm = this.formBuilder.group({
+      file: ['']
+    })
   }
 
   submit() {
@@ -44,6 +54,24 @@ export class AdminProductAddComponent implements OnInit {
         },
         error: err => this.adminMessageService.addSpringErrors(err.error)
       })
+  }
+
+  
+  uploadFile() {
+    let formData = new FormData();
+    formData.append('file', this.imageForm.get('file')?.value);
+
+    this.adminProductUpdateService.uploadImage(formData)
+      .subscribe(result => this.image = result.filename)
+
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.imageForm.patchValue({
+        file: event.target.files[0]
+      });
+    }
   }
 
 }
