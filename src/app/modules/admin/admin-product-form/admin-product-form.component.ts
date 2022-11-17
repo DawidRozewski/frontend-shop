@@ -19,6 +19,19 @@ import { FormGroup } from "@angular/forms";
             </div>
         </mat-form-field>
 
+        <mat-form-field appearance="fill">
+            <mat-label>Przyjazny url</mat-label>
+            <input matInput placeholder="Podaj url" formControlName="slug">
+            <div *ngIf="slug?.invalid && (slug?.dirty || slug?.touched)" class="errorMessages">
+                <div *ngIf="slug?.errors?.['required']">
+                    Nazwa jest wymagana
+                </div>
+                <div *ngIf="slug?.errors?.['minlength']">
+                    Nazwa musi mieć przynajmniej 4 znaki
+                </div>
+            </div>
+        </mat-form-field>
+
          <mat-form-field appearance="fill">
             <mat-label>Opis</mat-label>
             <textarea matInput rows="20" placeholder="Podaj opis produktu" formControlName="description"></textarea>
@@ -106,5 +119,9 @@ export class AdminProductFormComponent implements OnInit {
 
     get currency() {
         return this.parentForm.get("currency");
+    }
+
+    get slug() {
+        return this.parentForm.get("slug");
     }
 }
