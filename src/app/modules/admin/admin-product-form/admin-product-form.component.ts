@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {FormGroup} from "@angular/forms";
-import { AdminCategoryNameDTO } from "./adminCategoryNameDTO";
+import { AdminCategoryNameDTO } from "../common/dto/adminCategoryNameDTO";
 import { FormCategoryService } from "./form-category.service";
 
 @Component({

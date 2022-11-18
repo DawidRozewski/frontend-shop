@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultComponent } from './layoutd/default/default.component';
 import { FullpageComponent } from './layoutd/fullpage/fullpage.component';
 import { FullpageadminComponent } from './layoutd/fullpageadmin/fullpageadmin.component';
+import { AdminCategoryAddComponent } from './modules/admin/admin-category/admin-category-add/admin-category-add.component';
+import { AdminCategoryUpdateComponent } from './modules/admin/admin-category/admin-category-update/admin-category-update.component';
+import { AdminCategoryComponent } from './modules/admin/admin-category/admin-category.component';
 import { AdminProductAddComponent } from './modules/admin/admin-product-add/admin-product-add.component';
 import { AdminProductUpdateComponent } from './modules/admin/admin-product-update/admin-product-update.component';
 import { AdminProductComponent } from './modules/admin/admin-product/admin-product.component';
@@ -30,7 +33,10 @@ const routes: Routes = [
       {path:'admin', component: AdminComponent},
       {path:'admin/products', component: AdminProductComponent},
       {path:'admin/products/update/:id', component: AdminProductUpdateComponent},
-      {path:'admin/products/add', component: AdminProductAddComponent}
+      {path:'admin/products/add', component: AdminProductAddComponent},
+      {path:'admin/categories', component: AdminCategoryComponent},
+      {path:'admin/categories/add', component: AdminCategoryAddComponent},
+      {path:'admin/categories/update/:id', component: AdminCategoryUpdateComponent}
     ]
   }
 ];
