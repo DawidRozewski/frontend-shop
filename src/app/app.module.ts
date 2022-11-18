@@ -9,10 +9,12 @@ import { FullpageModule } from './layoutd/fullpage/fullpage.module';
 import { FullpageadminModule } from './layoutd/fullpageadmin/fullpageadmin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { CategoryComponent } from './modules/category/category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    
   ],
   imports: [
     BrowserModule,
