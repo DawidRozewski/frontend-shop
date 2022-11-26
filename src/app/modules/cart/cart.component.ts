@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from './cart.service';
 import { CartSummary } from './model/cartSummary';
+import { CartSummaryItem } from './model/cartSummaryItem';
 
 @Component({
   selector: 'app-cart',
@@ -10,6 +12,7 @@ import { CartSummary } from './model/cartSummary';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  formGroup!: FormGroup;
   summary!: CartSummary;
 
   constructor(
@@ -17,6 +20,7 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private cookieService: CookieService,
     private router: Router,
+    private formBuilder: FormBuilder
 
   ) { }
 
@@ -27,13 +31,20 @@ export class CartComponent implements OnInit {
     } else {
       this.getCart();
     }
+
+    this.formGroup = this.formBuilder.group({
+      items: this.formBuilder.array([])
+    })
   }
 
   getCart() {
     let cartId = Number(this.cookieService.get("cartId"));
     if (cartId > 0) {
       this.cartService.getCart(cartId)
-        .subscribe(summary => this.summary = summary)
+        .subscribe(summary => {
+          this.summary = summary
+          this.patchForItems();
+        });
     }
   }
 
@@ -42,13 +53,53 @@ export class CartComponent implements OnInit {
     this.cartService.addToCart(cartId, { productId: id, quantity: 1 })
       .subscribe(summary => {
         this.summary = summary;
+        this.patchForItems();
         this.cookieService.delete("cartId");
         this.cookieService.set("cartId", summary.id.toString(), this.expiresDays(3));
         this.router.navigate(["/cart"]);
       })
   }
+
+  patchForItems() {
+    let formItems = <FormArray>this.formGroup.get("items");
+    this.summary.items.forEach(item => {
+      formItems.push(this.formBuilder.group({
+        id: [item.id],
+        quantity: [item.quantity],
+        product: [item.product],
+        lineValue: [item.lineValue]
+      }));
+    });
+  }
+
   expiresDays(days: number): Date {
     return new Date(Date.now() + days * 24 * 60 * 60 * 1000);
+  }
+
+  submit() {
+    let cartId = Number(this.cookieService.get("cartId"));
+    this.cartService.updateCart(cartId, this.mapToRequestListDTO())
+      .subscribe(summary => {
+        this.summary = summary,
+          this.formGroup.get("items")?.setValue(summary.items)
+      });
+  }
+  mapToRequestListDTO(): any[] {
+    let items: Array<CartSummaryItem> = this.formGroup.get("items")?.value;
+    return items.map(item => ({
+      productId: item.product.id,
+      quantity: item.quantity
+    }));
+  }
+
+  deleteItem(itemId: number) {
+    this.cartService.deleteCartItem(itemId)
+      .subscribe(() => this.ngOnInit());
+  }
+
+
+  get items() {
+    return (<FormArray>this.formGroup.get("items")).controls;
   }
 
 }

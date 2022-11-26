@@ -10,13 +10,19 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-getCart(id: number): Observable<CartSummary> {
-  return this.http.get<CartSummary>("/api/carts/" + id);
-}
+  getCart(id: number): Observable<CartSummary> {
+    return this.http.get<CartSummary>("/api/carts/" + id);
+  }
 
-addToCart(id: number, cartItem: any): Observable<CartSummary> {
-  return this.http.put<CartSummary>("/api/carts/" + id, cartItem);
-}
+  addToCart(id: number, cartItem: any): Observable<CartSummary> {
+    return this.http.put<CartSummary>("/api/carts/" + id, cartItem);
+  }
 
+  updateCart(id: number, items: any[]): Observable<CartSummary> {
+    return this.http.put<CartSummary>("/api/carts/" + id + "/update", items);
+  }
 
+  deleteCartItem(itemId: number): Observable<void> {
+    return this.http.delete<void>("/api/cartsItems/" + itemId);
+  }
 }
