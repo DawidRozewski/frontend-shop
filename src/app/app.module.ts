@@ -13,6 +13,7 @@ import { CategoryComponent } from './modules/category/category.component';
 import { AdminReviewComponent } from './modules/admin/admin-review/admin-review.component';
 import { CartComponent } from './modules/cart/cart.component';
 import { CookieService } from 'ngx-cookie-service';
+import { OrderComponent } from './modules/order/order.component';
 
 @NgModule({
   declarations: [

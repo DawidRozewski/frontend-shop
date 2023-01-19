@@ -30,18 +30,18 @@
                 </div>
             </div>
         </div>
-
         <div class="card-row" fxLayoutAlign="end start">
             <button mat-flat-button color="warn" (click)="submit()">Zaktualizuj koszyk</button>
         </div>
-
         <div fxLayoutAlign="end start">
             <div class="summary"> Wartość: </div>
             <div class="summary"> <b>{{summary?.summary?.grossValue}}</b></div>
         </div>
-
         <div>
             <button mat-flat-button color="warn" (click)="back()">Powrót do zakupów</button>
+        </div>
+        <div fxLayoutAlign="end start">
+            <button type="button" class="orderButton" mat-flat-button color="accent" routerLink="/order">Zamawiam</button>
         </div>
     </div>
 </form>
