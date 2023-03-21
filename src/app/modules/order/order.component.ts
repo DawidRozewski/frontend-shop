@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { CartSummary } from '../common/model/cart/cartSummary';
+import { CartIconService } from '../common/service/cart-icon.service';
 import { InitData } from './model/initData';
 import { OrderDTO } from './model/orderDTO';
 import { OrderSummary } from './model/orderSummary';
@@ -18,6 +19,7 @@ export class OrderComponent implements OnInit {
   formGroup!: FormGroup;
   orderSummary!: OrderSummary;
   initData!: InitData;
+  errorMessage = false;
 
   private statuses = new Map<string, string>([
     ["NEW", "Nowe"]
@@ -26,7 +28,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private orderService: OrderService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cartIconService: CartIconService
   ) { }
 
   ngOnInit(): void {
@@ -39,8 +42,8 @@ export class OrderComponent implements OnInit {
       city: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
-      shipments: ['', Validators.required],
-      payments: ['', Validators.required],
+      shipment: ['', Validators.required],
+      payment: ['', Validators.required],
     });
     this.getinitData();
   }
@@ -62,13 +65,18 @@ export class OrderComponent implements OnInit {
         email: this.formGroup.get('email')?.value,
         phone: this.formGroup.get('phone')?.value,
         cartId: Number(this.cookieService.get('cartId')),
-        shipmentId: Number(this.formGroup.get('shipments')?.value.id),
-        paymentId: Number(this.formGroup.get('payments')?.value.id),
+        shipmentId: Number(this.formGroup.get('shipment')?.value.id),
+        paymentId: Number(this.formGroup.get('payment')?.value.id),
       } as OrderDTO)
-      .subscribe(orderSummary => {
+      .subscribe({
+        next: orderSummary => {
         this.orderSummary = orderSummary,
         this.cookieService.delete("cartId");
-      });
+        this.errorMessage = false;
+        this.cartIconService.cartChanged(0);
+      },
+      error: err => this.errorMessage = true
+    });
     }
   }
 
@@ -82,15 +90,13 @@ export class OrderComponent implements OnInit {
     }
 
     setDefaultPayment() {
-      this.formGroup.patchValue({"payments":
-      this.initData.payments.filter(
-        paymenst => paymenst.defaultPayment === true)[0]})
+      this.formGroup.patchValue({"payment": this.initData.payment
+      .filter(payment => payment.defaultPayment === true)[0]})
     }
 
     setDefaultShipment() {
-      this.formGroup.patchValue({"shipments":
-       this.initData.shipments.filter(
-        shipment => shipment.defaultShipment === true)[0]})
+      this.formGroup.patchValue({"shipment": this.initData.shipment
+      .filter(shipment => shipment.defaultShipment === true)[0]})
     }
 
   getStatus(status: string) {
