@@ -9,17 +9,11 @@ import { FullpageModule } from './layoutd/fullpage/fullpage.module';
 import { FullpageadminModule } from './layoutd/fullpageadmin/fullpageadmin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { CategoryComponent } from './modules/category/category.component';
-import { AdminReviewComponent } from './modules/admin/admin-review/admin-review.component';
-import { CartComponent } from './modules/cart/cart.component';
 import { CookieService } from 'ngx-cookie-service';
-import { OrderComponent } from './modules/order/order.component';
-import { AdminOrderExportComponent } from './modules/admin/admin-order/admin-order-export/admin-order-export.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-  
   ],
   imports: [
     BrowserModule,
