@@ -14,6 +14,7 @@ import { AdminReviewComponent } from './modules/admin/admin-review/admin-review.
 import { CartComponent } from './modules/cart/cart.component';
 import { CookieService } from 'ngx-cookie-service';
 import { OrderComponent } from './modules/order/order.component';
+import { AdminOrderExportComponent } from './modules/admin/admin-order/admin-order-export/admin-order-export.component';
 
 @NgModule({
   declarations: [
