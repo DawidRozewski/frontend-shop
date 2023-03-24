@@ -11,10 +11,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { FullpageadminemptyModule } from './layoutd/fullpageadminempty/fullpageadminempty.module';
 import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { AdminAuthorizeGuard } from './modules/common/guard/adminAuthorizeGuard';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
