@@ -12,6 +12,8 @@ import { FullpageadminemptyModule } from './layoutd/fullpageadminempty/fullpagea
 import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { AdminAuthorizeGuard } from './modules/common/guard/adminAuthorizeGuard';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { ProfileAuthorizeGuard } from './modules/common/guard/profileAuthorizeGuard';
+import { LostPasswordComponent } from './modules/login/lost-password/lost-password.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { ProfileComponent } from './modules/profile/profile.component';
   providers: [
     CookieService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    AdminAuthorizeGuard
+    AdminAuthorizeGuard,
+    ProfileAuthorizeGuard
   ],
   bootstrap: [AppComponent]
 })
