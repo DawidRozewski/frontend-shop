@@ -14,6 +14,7 @@ import { AdminAuthorizeGuard } from './modules/common/guard/adminAuthorizeGuard'
 import { ProfileComponent } from './modules/profile/profile.component';
 import { ProfileAuthorizeGuard } from './modules/common/guard/profileAuthorizeGuard';
 import { LostPasswordComponent } from './modules/login/lost-password/lost-password.component';
+import { OrderNotificationComponent } from './modules/order/order-notification/order-notification.component';
 
 @NgModule({
   declarations: [

@@ -28,6 +28,7 @@ import { OrderComponent } from './modules/order/order.component';
 import { ProductDetailsComponent } from './modules/product-details/product-details.component';
 import { ProductComponent } from './modules/product/product.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { OrderNotificationComponent } from './modules/order/order-notification/order-notification.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
       {path:'categories/:slug', component: CategoryComponent},
       {path:'cart', component: CartComponent},
       {path:'order', component: OrderComponent},
+      {path:'order/notificaton/:orderHash', component: OrderNotificationComponent},
       {path:'profile', component: ProfileComponent, canActivate: [ProfileAuthorizeGuard]},
     ]
   },
